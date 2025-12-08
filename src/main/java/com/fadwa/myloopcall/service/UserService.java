@@ -4,4 +4,5 @@ import com.fadwa.myloopcall.dto.UserDto;
 
 public interface UserService {
     UserDto getUserByEmail(String value);
+    void createUser();
 }
