@@ -11,9 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
-import tools.jackson.databind.ObjectMapper;
 
-import java.util.Map;
 
 @RestController
 @RequestMapping("${app.api.prefix}/auth")
@@ -23,18 +21,15 @@ public class AuthController {
 
     private final AuthenticationService authenticationService;
     private final UserService userService;
-    private final ObjectMapper objectMapper;
 
     @PostMapping("/login")
     public ResponseEntity<UserDto> login(@RequestBody @Valid UserLoginRequestDto loginRequest) {
+        log.debug(loginRequest.toString());
         UserDetails userDetails = authenticationService.authenticate(loginRequest.email(), loginRequest.password());
         String tokenValue = authenticationService.generateToken(userDetails);
         UserDto user = userService.getUserByEmail(userDetails.getUsername());
-        UserDto response = objectMapper.updateValue(user,
-                Map.of("token", tokenValue)
-        );
-
-        return ResponseEntity.ok(response);
+        user.setToken(tokenValue);
+        return ResponseEntity.ok(user);
     }
     @GetMapping("/admin")
     public ResponseEntity<?> test() {

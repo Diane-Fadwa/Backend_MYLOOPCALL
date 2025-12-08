@@ -31,7 +31,7 @@ logging:
 
 app:
   api:
-    prefix: /api/v1/
+    prefix: /api/v1
   jwt:
     secret: b166b66af32787439dad6782260acf4abfff43021fe49019dbe55568ebe9ccec
     expirMs: 86400000

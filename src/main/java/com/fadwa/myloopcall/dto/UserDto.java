@@ -1,18 +1,22 @@
 package com.fadwa.myloopcall.dto;
 
 import com.fadwa.myloopcall.enums.RoleEnum;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 
-public record UserDto(
-        Long id,
-        String email,
-        String firstName,
-        String lastName,
-        RoleEnum role,
-        String profileImage,
-        LocalDateTime createdAt,
-        LocalDateTime updatedAt,
-        String token
-) {
+
+@Getter
+@Setter
+public class UserDto{
+    private Long id;
+    private String email;
+    private String firstName;
+    private String lastName;
+    private RoleEnum role;
+    private String profileImage;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
+    private String token;
 }
