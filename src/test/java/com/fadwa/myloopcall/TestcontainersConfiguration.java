@@ -1,5 +1,6 @@
 package com.fadwa.myloopcall;
 
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
 import org.springframework.context.annotation.Bean;
@@ -13,6 +14,10 @@ class TestcontainersConfiguration {
     @ServiceConnection
     PostgreSQLContainer<?> postgresContainer() {
         return new PostgreSQLContainer<>(DockerImageName.parse("postgres:latest"));
+    }
+
+    public static void main(String[] args) {
+        SpringApplication.from(MyloopcallApplication::main).with(TestcontainersConfiguration.class).run(args);
     }
 
 }

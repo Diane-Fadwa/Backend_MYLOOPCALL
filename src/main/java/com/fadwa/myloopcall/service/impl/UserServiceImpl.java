@@ -8,6 +8,7 @@ import com.fadwa.myloopcall.service.UserService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import tools.jackson.databind.ObjectMapper;
 
@@ -18,13 +19,13 @@ import tools.jackson.databind.ObjectMapper;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository repository;
-    private final ObjectMapper objectMapper;
+    private final ModelMapper modelMapper;
 
 
     @Override
     public UserDto getUserByEmail(String value) {
         UserEntity user = repository.findByUserByUsernameOrEmail(value).orElseThrow(UserNotFoundException::new);
-        return objectMapper.convertValue(user, UserDto.class);
+        return modelMapper.map(user, UserDto.class);
     }
 
 }
