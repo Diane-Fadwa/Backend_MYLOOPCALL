@@ -50,7 +50,9 @@ public class SecurityConfig {
                 .authorizeHttpRequests( auth -> auth
                         .requestMatchers(apiPrefix + "/auth/**").permitAll()
                         .requestMatchers(apiPrefix +"/users/**").hasAnyRole(RoleEnum.ADMIN.name(),RoleEnum.CLIENT.name())
-                                       )
+                        .requestMatchers(apiPrefix +"/prospects/**").hasAnyRole(RoleEnum.ADMIN.name(),RoleEnum.CLIENT.name())
+
+                )
                 .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .cors(Customizer.withDefaults())
