@@ -22,22 +22,22 @@ public class ProspectDTO {
 
     private LocalDateTime rappelLe;
 
-    @NotBlank(message = "Produit is required")
+//    @NotBlank(message = "Produit is required")
     private ProduitDTO produit;
 
-    @NotBlank(message = "Agent is required")
+//    @NotBlank(message = "Agent is required")
     private AgentDTO agent;
 
-    @NotBlank(message = "Zone is required")
+//    @NotBlank(message = "Zone is required")
     private ZoneEnum zone;
 
-    @NotBlank(message = "Profil is required")
+//    @NotBlank(message = "Profil is required")
     private String profil;
 
-    @NotBlank(message = "Nom is required")
+//    @NotBlank(message = "Nom is required")
     private String nom;
 
-    @NotBlank(message = "Prenom is required")
+//    @NotBlank(message = "Prenom is required")
     private String prenom;
 
     private String adresse;
@@ -46,17 +46,17 @@ public class ProspectDTO {
 
     private String ville;
 
-    @NotBlank(message = "Numero mobile is required")
+//    @NotBlank(message = "Numero mobile is required")
     private Integer numeroMobile;
 
     private String commentaire;
 
-    @NotBlank(message = "Confirmateur is required")
+//    @NotBlank(message = "Confirmateur is required")
     private String confirmateur;
 
-    @NotBlank(message = "Statut is required")
+//    @NotBlank(message = "Statut is required")
     private StatutEnum statut;
 
-    @NotBlank(message = "Installateur is required")
+//    @NotBlank(message = "Installateur is required")
     private InstallateurDTO installateur;
 }

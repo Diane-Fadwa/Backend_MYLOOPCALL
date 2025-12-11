@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/produits")
+@RequestMapping("${app.api.prefix}/produits")
 @RequiredArgsConstructor
 @Slf4j
 @CrossOrigin(origins = "*")
@@ -47,14 +47,8 @@ public class ProduitController {
         return ResponseEntity.ok(produit);
     }
 
-    @GetMapping
-    public ResponseEntity<List<ProduitDTO>> getAllProduits() {
-        log.info("REST request to get all produits");
-        List<ProduitDTO> produits = produitService.getAllProduits();
-        return ResponseEntity.ok(produits);
-    }
 
-    @GetMapping("/paginated")
+    @GetMapping
     public ResponseEntity<Page<ProduitDTO>> getAllProduitsPaginated(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "50") int size,

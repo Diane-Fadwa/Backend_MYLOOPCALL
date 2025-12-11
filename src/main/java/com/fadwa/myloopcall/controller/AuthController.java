@@ -32,11 +32,11 @@ public class AuthController {
         user.setToken(tokenValue);
         return ResponseEntity.ok(user);
     }
-//    @GetMapping("/admin")
-//    public ResponseEntity<?> test() {
-//            userService.createUser();
-//        return ResponseEntity.ok(true);
-//    }
+    @GetMapping("/admin")
+    public ResponseEntity<?> test() {
+            userService.createUser();
+        return ResponseEntity.ok(true);
+    }
 
 
 

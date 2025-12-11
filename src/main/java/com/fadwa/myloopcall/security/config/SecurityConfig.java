@@ -51,6 +51,11 @@ public class SecurityConfig {
                         .requestMatchers(apiPrefix + "/auth/**").permitAll()
                         .requestMatchers(apiPrefix +"/users/**").hasAnyRole(RoleEnum.ADMIN.name())
                         .requestMatchers(apiPrefix +"/prospects/**").hasAnyRole(RoleEnum.ADMIN.name(),RoleEnum.CLIENT.name())
+                        .requestMatchers(apiPrefix +"/agents/**").hasAnyRole(RoleEnum.ADMIN.name(),RoleEnum.CLIENT.name())
+                        .requestMatchers(apiPrefix +"/produits/**").hasAnyRole(RoleEnum.ADMIN.name(),RoleEnum.CLIENT.name())
+                        .requestMatchers(apiPrefix +"/installateurs/**").hasAnyRole(RoleEnum.ADMIN.name(),RoleEnum.CLIENT.name())
+
+
 
                 )
                 .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

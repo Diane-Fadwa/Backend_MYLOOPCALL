@@ -16,7 +16,7 @@ public class ProduitDTO {
 
     private Long id;
 
-    @NotBlank(message = "Le nom est obligatoire")
+    //@NotBlank(message = "Le nom est obligatoire")
     private String nom;
 
     private String description;

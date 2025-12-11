@@ -12,14 +12,15 @@ import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+
 public class InstallateurDTO {
 
     private Long id;
 
-    @NotBlank(message = "Le nom est obligatoire")
+    //@NotBlank(message = "Le nom est obligatoire")
     private String nom;
 
-    @Email(message = "Email invalide")
+    //@Email(message = "Email invalide")
     private String email;
 
     private String telephone;

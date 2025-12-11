@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/installateurs")
+@RequestMapping("${app.api.prefix}/installateurs")
 @RequiredArgsConstructor
 @Slf4j
 @CrossOrigin(origins = "*")

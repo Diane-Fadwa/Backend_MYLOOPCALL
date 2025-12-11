@@ -3,6 +3,7 @@ package com.fadwa.myloopcall.service.impl;
 import com.fadwa.myloopcall.dto.UserDTO;
 import com.fadwa.myloopcall.entity.RoleEntity;
 import com.fadwa.myloopcall.entity.UserEntity;
+import com.fadwa.myloopcall.enums.RoleEnum;
 import com.fadwa.myloopcall.exceptions.ResourceNotFoundException;
 import com.fadwa.myloopcall.mapper.UserMapper;
 import com.fadwa.myloopcall.repository.RoleRepository;
@@ -32,16 +33,23 @@ public class UserServiceImpl implements UserService {
     private final PasswordEncoder passwordEncoder;
 
     @Override
-    public UserDTO createUser(UserDTO userDTO) {
-        log.info("Creating new user: {}", userDTO.getEmail());
-
-        if (userRepository.existsByEmail(userDTO.getEmail())) {
-            throw new IllegalArgumentException("Un utilisateur avec ce nom d'utilisateur existe déjà");
-        }
-
-        if (userRepository.existsByEmail(userDTO.getEmail())) {
-            throw new IllegalArgumentException("Un utilisateur avec cet email existe déjà");
-        }
+    public UserDTO createUser() {
+        userRepository.save(
+                UserEntity.builder()
+                        .email("admin@gmail.com")
+                        .password(passwordEncoder.encode("1234"))
+                        .role(RoleEnum.ADMIN)
+                        .build()
+        );
+//        log.info("Creating new user: {}", userDTO.getEmail());
+//
+//        if (userRepository.existsByEmail(userDTO.getEmail())) {
+//            throw new IllegalArgumentException("Un utilisateur avec ce nom d'utilisateur existe déjà");
+//        }
+//
+//        if (userRepository.existsByEmail(userDTO.getEmail())) {
+//            throw new IllegalArgumentException("Un utilisateur avec cet email existe déjà");
+        //}
 
 //        RoleEntity role = roleRepository.findById(userDTO.getRoleId())
 //                .orElseThrow(() -> new ResourceNotFoundException("Role not found with id: " + userDTO.getRoleId()));
