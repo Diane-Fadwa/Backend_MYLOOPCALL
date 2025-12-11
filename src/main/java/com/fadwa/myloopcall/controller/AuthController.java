@@ -1,7 +1,8 @@
 package com.fadwa.myloopcall.controller;
 
 
-import com.fadwa.myloopcall.dto.UserDto;
+import com.fadwa.myloopcall.dto.UserDTO;
+import com.fadwa.myloopcall.dto.UserDTO;
 import com.fadwa.myloopcall.dto.UserLoginRequestDto;
 import com.fadwa.myloopcall.service.AuthenticationService;
 import com.fadwa.myloopcall.service.UserService;
@@ -23,19 +24,19 @@ public class AuthController {
     private final UserService userService;
 
     @PostMapping("/login")
-    public ResponseEntity<UserDto> login(@RequestBody @Valid UserLoginRequestDto loginRequest) {
+    public ResponseEntity<UserDTO> login(@RequestBody @Valid UserLoginRequestDto loginRequest) {
         log.debug(loginRequest.toString());
         UserDetails userDetails = authenticationService.authenticate(loginRequest.email(), loginRequest.password());
         String tokenValue = authenticationService.generateToken(userDetails);
-        UserDto user = userService.getUserByEmail(userDetails.getUsername());
+        UserDTO user = userService.getUserByEmail(userDetails.getUsername());
         user.setToken(tokenValue);
         return ResponseEntity.ok(user);
     }
-    @GetMapping("/admin")
-    public ResponseEntity<?> test() {
-            userService.createUser();
-        return ResponseEntity.ok(true);
-    }
+//    @GetMapping("/admin")
+//    public ResponseEntity<?> test() {
+//            userService.createUser();
+//        return ResponseEntity.ok(true);
+//    }
 
 
 

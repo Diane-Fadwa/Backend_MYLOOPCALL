@@ -1,6 +1,7 @@
 package com.fadwa.myloopcall.controller;
 
 import com.fadwa.myloopcall.dto.ProspectDTO;
+import com.fadwa.myloopcall.enums.StatutEnum;
 import com.fadwa.myloopcall.service.ProspectService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -16,10 +17,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/prospects")
+@RequestMapping("${app.api.prefix}/prospects")
 @RequiredArgsConstructor
 @Slf4j
-@CrossOrigin(origins = "*")
 public class ProspectController {
 
     private final ProspectService prospectService;
@@ -59,16 +59,6 @@ public class ProspectController {
         return ResponseEntity.ok(prospect);
     }
 
-    /**
-     * Get all prospects without pagination
-     * GET /api/prospects
-     */
-    @GetMapping
-    public ResponseEntity<List<ProspectDTO>> getAllProspects() {
-        log.info("REST request to get all prospects");
-        List<ProspectDTO> prospects = prospectService.getAllProspects();
-        return ResponseEntity.ok(prospects);
-    }
 
     /**
      * Get all prospects with pagination
@@ -124,7 +114,7 @@ public class ProspectController {
     public ResponseEntity<Page<ProspectDTO>> filterProspects(
             @RequestParam(required = false) String agent,
             @RequestParam(required = false) String confirmateur,
-            @RequestParam(required = false) String statut,
+            @RequestParam(required = false) StatutEnum statut,
             @RequestParam(required = false) String produit,
             @RequestParam(required = false) String search,
             @RequestParam(defaultValue = "0") int page,
@@ -155,7 +145,7 @@ public class ProspectController {
     public ResponseEntity<List<ProspectDTO>> filterProspectsAll(
             @RequestParam(required = false) String agent,
             @RequestParam(required = false) String confirmateur,
-            @RequestParam(required = false) String statut,
+            @RequestParam(required = false) StatutEnum statut,
             @RequestParam(required = false) String produit,
             @RequestParam(required = false) String search) {
 

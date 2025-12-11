@@ -1,11 +1,14 @@
 package com.fadwa.myloopcall.repository;
 
 import com.fadwa.myloopcall.entity.ProspectEntity;
+import com.fadwa.myloopcall.enums.StatutEnum;
+import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
@@ -26,7 +29,7 @@ public interface ProspectRepository extends JpaRepository<ProspectEntity, Long>,
     List<ProspectEntity> findByConfirmateur(String confirmateur);
 
     // Filter by statut
-    List<ProspectEntity> findByStatut(String statut);
+    List<ProspectEntity> findByStatut(StatutEnum statut);
 
     // Filter by produit
     List<ProspectEntity> findByProduit(String produit);
@@ -44,8 +47,11 @@ public interface ProspectRepository extends JpaRepository<ProspectEntity, Long>,
     List<ProspectEntity> findByFilters(
             @Param("agent") String agent,
             @Param("confirmateur") String confirmateur,
-            @Param("statut") String statut,
+            @Param("statut") StatutEnum statut,
             @Param("produit") String produit,
             @Param("searchTerm") String searchTerm
     );
+
+    Page<ProspectEntity> findByDeletedTrue(Pageable pageable);
+
 }

@@ -1,6 +1,7 @@
 package com.fadwa.myloopcall.service;
 
 import com.fadwa.myloopcall.dto.ProspectDTO;
+import com.fadwa.myloopcall.enums.StatutEnum;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -34,13 +35,7 @@ public interface ProspectService {
      * Get all prospects
      * @return list of all prospects
      */
-    List<ProspectDTO> getAllProspects();
 
-    /**
-     * Get all prospects with pagination
-     * @param pageable pagination information
-     * @return page of prospects
-     */
     Page<ProspectDTO> getAllProspects(Pageable pageable);
 
     /**
@@ -68,7 +63,7 @@ public interface ProspectService {
     List<ProspectDTO> filterProspects(
             String agent,
             String confirmateur,
-            String statut,
+            StatutEnum statut,
             String produit,
             String searchTerm
     );
@@ -86,7 +81,7 @@ public interface ProspectService {
     Page<ProspectDTO> filterProspects(
             String agent,
             String confirmateur,
-            String statut,
+            StatutEnum statut,
             String produit,
             String searchTerm,
             Pageable pageable

@@ -2,6 +2,7 @@ package com.fadwa.myloopcall.service.impl;
 
 import com.fadwa.myloopcall.dto.ProspectDTO;
 import com.fadwa.myloopcall.entity.ProspectEntity;
+import com.fadwa.myloopcall.enums.StatutEnum;
 import com.fadwa.myloopcall.exceptions.ResourceNotFoundException;
 import com.fadwa.myloopcall.mapper.ProspectMapper;
 import com.fadwa.myloopcall.repository.ProspectRepository;
@@ -60,22 +61,13 @@ public class ProspectServiceImpl implements ProspectService {
         return prospectMapper.toDTO(prospect);
     }
 
-    @Override
-    @Transactional(readOnly = true)
-    public List<ProspectDTO> getAllProspects() {
-        log.info("Fetching all prospects");
-
-        List<ProspectEntity> prospects = prospectRepository.findAll();
-        return prospectMapper.toDTOList(prospects);
-    }
 
     @Override
-    @Transactional(readOnly = true)
     public Page<ProspectDTO> getAllProspects(Pageable pageable) {
         log.info("Fetching prospects with pagination: page {}, size {}",
                 pageable.getPageNumber(), pageable.getPageSize());
 
-        Page<ProspectEntity> prospects = prospectRepository.findAll(pageable);
+        Page<ProspectEntity> prospects = prospectRepository.findByDeletedTrue(pageable);
         return prospects.map(prospectMapper::toDTO);
     }
 
@@ -83,16 +75,13 @@ public class ProspectServiceImpl implements ProspectService {
     public void deleteProspect(Long id) {
         log.info("Deleting prospect with id: {}", id);
 
-        if (!prospectRepository.existsById(id)) {
-            throw new ResourceNotFoundException("Prospect not found with id: " + id);
-        }
-
-        prospectRepository.deleteById(id);
+        ProspectEntity prospect = prospectRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Prospect not found with id: " + id));
+        prospect.setDeleted(true);
         log.info("Prospect deleted successfully with id: {}", id);
     }
 
     @Override
-    @Transactional(readOnly = true)
     public List<ProspectDTO> searchProspects(String searchTerm) {
         log.info("Searching prospects with term: {}", searchTerm);
 
@@ -101,11 +90,10 @@ public class ProspectServiceImpl implements ProspectService {
     }
 
     @Override
-    @Transactional(readOnly = true)
     public List<ProspectDTO> filterProspects(
             String agent,
             String confirmateur,
-            String statut,
+            StatutEnum statut,
             String produit,
             String searchTerm) {
 
@@ -115,7 +103,7 @@ public class ProspectServiceImpl implements ProspectService {
         List<ProspectEntity> prospects = prospectRepository.findByFilters(
                 agent != null && !agent.isEmpty() ? agent : null,
                 confirmateur != null && !confirmateur.isEmpty() ? confirmateur : null,
-                statut != null && !statut.isEmpty() ? statut : null,
+                statut != null ? statut : null,
                 produit != null && !produit.isEmpty() ? produit : null,
                 searchTerm != null && !searchTerm.isEmpty() ? searchTerm : null
         );
@@ -124,11 +112,10 @@ public class ProspectServiceImpl implements ProspectService {
     }
 
     @Override
-    @Transactional(readOnly = true)
     public Page<ProspectDTO> filterProspects(
             String agent,
             String confirmateur,
-            String statut,
+            StatutEnum statut,
             String produit,
             String searchTerm,
             Pageable pageable) {
@@ -139,7 +126,7 @@ public class ProspectServiceImpl implements ProspectService {
         List<ProspectEntity> prospects = prospectRepository.findByFilters(
                 agent != null && !agent.isEmpty() ? agent : null,
                 confirmateur != null && !confirmateur.isEmpty() ? confirmateur : null,
-                statut != null && !statut.isEmpty() ? statut : null,
+                statut != null ? statut : null,
                 produit != null && !produit.isEmpty() ? produit : null,
                 searchTerm != null && !searchTerm.isEmpty() ? searchTerm : null
         );

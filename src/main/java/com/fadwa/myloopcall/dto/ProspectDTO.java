@@ -1,10 +1,13 @@
 package com.fadwa.myloopcall.dto;
 
+import com.fadwa.myloopcall.enums.StatutEnum;
+import com.fadwa.myloopcall.enums.ZoneEnum;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 @Getter
@@ -15,20 +18,18 @@ public class ProspectDTO {
 
     private Long id;
 
-    private LocalDate date;
+    private LocalDateTime date;
 
-    private LocalDate rappelLe;
-
-    private String heure;
+    private LocalDateTime rappelLe;
 
     @NotBlank(message = "Produit is required")
-    private String produit;
+    private ProduitDTO produit;
 
     @NotBlank(message = "Agent is required")
-    private String agent;
+    private AgentDTO agent;
 
     @NotBlank(message = "Zone is required")
-    private String zone;
+    private ZoneEnum zone;
 
     @NotBlank(message = "Profil is required")
     private String profil;
@@ -41,12 +42,12 @@ public class ProspectDTO {
 
     private String adresse;
 
-    private String codePostal;
+    private Integer codePostal;
 
     private String ville;
 
     @NotBlank(message = "Numero mobile is required")
-    private String numeroMobile;
+    private Integer numeroMobile;
 
     private String commentaire;
 
@@ -54,8 +55,8 @@ public class ProspectDTO {
     private String confirmateur;
 
     @NotBlank(message = "Statut is required")
-    private String statut;
+    private StatutEnum statut;
 
     @NotBlank(message = "Installateur is required")
-    private String installateur;
+    private InstallateurDTO installateur;
 }

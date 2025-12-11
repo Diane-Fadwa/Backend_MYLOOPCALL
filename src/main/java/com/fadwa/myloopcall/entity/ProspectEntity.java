@@ -1,73 +1,71 @@
 package com.fadwa.myloopcall.entity;
 
+import com.fadwa.myloopcall.enums.StatutEnum;
+import com.fadwa.myloopcall.enums.ZoneEnum;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
+import java.time.LocalDateTime;
+
 @Getter
 @Setter
 @Builder
 @Entity(name = "Prospect")
 @Table(name = "prospects")
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
-
-public class ProspectEntity {
+public class ProspectEntity extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "date")
-    private LocalDate date;
+    private LocalDateTime date;
 
-    @Column(name = "rappel_le")
-    private LocalDate rappelLe;
+    private LocalDateTime rappelLe;
 
-    @Column(name = "heure")
-    private String heure;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "produit_id", nullable = false)
+    private ProduitEntity produit;
 
-    @Column(name = "produit", nullable = false)
-    private String produit;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "agent_id", nullable = false)
+    private AgentEntity agent;
 
-    @Column(name = "agent", nullable = false)
-    private String agent;
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private ZoneEnum zone;
 
-    @Column(name = "zone", nullable = false)
-    private String zone;
-
-    @Column(name = "profil", nullable = false)
+    @Column(nullable = false)
     private String profil;
 
-    @Column(name = "nom", nullable = false)
+    @Column(nullable = false)
     private String nom;
 
-    @Column(name = "prenom", nullable = false)
+    @Column(nullable = false)
     private String prenom;
 
-    @Column(name = "adresse")
     private String adresse;
 
-    @Column(name = "code_postal")
+    @Column(length = 10)
     private String codePostal;
 
-    @Column(name = "ville")
     private String ville;
 
-    @Column(name = "numero_mobile", nullable = false)
+    @Column(nullable = false, length = 15)
     private String numeroMobile;
 
-    @Column(name = "commentaire", length = 1000)
+    @Column(length = 1000)
     private String commentaire;
 
-    @Column(name = "confirmateur", nullable = false)
+    @Column(nullable = false)
     private String confirmateur;
 
-    @Column(name = "statut", nullable = false)
-    private String statut;
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private StatutEnum statut;
 
-    @Column(name = "installateur", nullable = false)
-    private String installateur;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "installateur_id", nullable = false)
+    private InstallateurEntity installateur;
 }

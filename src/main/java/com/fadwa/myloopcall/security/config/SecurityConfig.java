@@ -49,7 +49,7 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests( auth -> auth
                         .requestMatchers(apiPrefix + "/auth/**").permitAll()
-                        .requestMatchers(apiPrefix +"/users/**").hasAnyRole(RoleEnum.ADMIN.name(),RoleEnum.CLIENT.name())
+                        .requestMatchers(apiPrefix +"/users/**").hasAnyRole(RoleEnum.ADMIN.name())
                         .requestMatchers(apiPrefix +"/prospects/**").hasAnyRole(RoleEnum.ADMIN.name(),RoleEnum.CLIENT.name())
 
                 )
