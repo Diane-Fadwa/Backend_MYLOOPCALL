@@ -8,17 +8,17 @@ import java.util.List;
 
 public interface RoleService {
 
-    RoleDTO createRole(RoleDTO roleDTO);
-
-    RoleDTO updateRole(Long id, RoleDTO roleDTO);
-
-    RoleDTO getRoleById(Long id);
-
-    List<RoleDTO> getAllRoles();
-
-    Page<RoleDTO> getAllRoles(Pageable pageable);
-
-    void deleteRole(Long id);
-
-    RoleDTO getRoleByNom(String nom);
+//    RoleDTO createRole(RoleDTO roleDTO);
+//
+//    RoleDTO updateRole(Long id, RoleDTO roleDTO);
+//
+//    RoleDTO getRoleById(Long id);
+//
+//    List<RoleDTO> getAllRoles();
+//
+//    Page<RoleDTO> getAllRoles(Pageable pageable);
+//
+//    void deleteRole(Long id);
+//
+//    RoleDTO getRoleByNom(String nom);
 }

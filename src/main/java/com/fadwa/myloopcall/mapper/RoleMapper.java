@@ -18,15 +18,15 @@ public interface RoleMapper {
 
     RoleDTO toDTO(RoleEntity role);
 
-    RoleEntity toEntity(RoleDTO roleDTO);
-
-    List<RoleDTO> toDTOList(List<RoleEntity> roles);
-
-    List<RoleEntity> toEntityList(List<RoleDTO> roleDTOs);
-
-    void updateEntityFromDTO(RoleDTO roleDTO, @MappingTarget RoleEntity role);
-
-    RoleDTO.PermissionDTO toPermissionDTO(RoleEntity.Permission permission);
-
-    RoleEntity.Permission toPermissionEntity(RoleDTO.PermissionDTO permissionDTO);
+//    RoleEntity toEntity(RoleDTO roleDTO);
+//
+//    List<RoleDTO> toDTOList(List<RoleEntity> roles);
+//
+//    List<RoleEntity> toEntityList(List<RoleDTO> roleDTOs);
+//
+//    void updateEntityFromDTO(RoleDTO roleDTO, @MappingTarget RoleEntity role);
+//
+//    RoleDTO.PermissionDTO toPermissionDTO(RoleEntity.Permission permission);
+//
+//    RoleEntity.Permission toPermissionEntity(RoleDTO.PermissionDTO permissionDTO);
 }
